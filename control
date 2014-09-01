@@ -1,0 +1,9 @@
+Name: NoGrayContrast
+Package: org.thebigboss.nograycontrast
+Author: PoomSmart
+Maintainer: BigBoss <bigboss@thebigboss.org>
+Depends: firmware (>= 7.1), mobilesubstrate
+Section: Tweaks
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Remove iOS 7.1's gray contrast handling.
