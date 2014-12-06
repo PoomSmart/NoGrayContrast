@@ -1,4 +1,8 @@
 #import <UIKit/UIKit.h>
+#import "../PS.h"
+
+@interface _UIBackdropView : UIView
+@end
 
 @interface _UILegibilitySettings : NSObject
 @end
@@ -39,8 +43,7 @@ extern "C" BOOL _UIAccessibilityEnhanceBackgroundContrast();
 {
 	%orig;
 	UIImageView *backgroundImageView = MSHookIvar<UIImageView *>(self, "_backgroundImageView");
-	if (backgroundImageView != nil)
-		backgroundImageView.hidden = NO;
+	backgroundImageView.hidden = NO;
 }
 
 - (void)_configureAccessibilityBackground
@@ -89,8 +92,9 @@ extern "C" BOOL _UIAccessibilityEnhanceBackgroundContrast();
 		int location = [param iconLocation];
 		// 0 - homescreen
 		// 2 - dock
-		// 4 - folder (expanded)
-		if (location == 2 || location == 4) {
+		// 4 - folder (expanded, iOS 7)
+		// 5 - folder (expanded, iOS 8)
+		if (location == 2 || (isiOS8Up && location == 5) || (isiOS7 && location == 4)) {
 			// What we do here is to disable the black label of icons when they are in dock or expanded folders and contrast option is enabled, just like iOS 7.0
 			// Labels color for homescreen icons is normally white. (If the wallpaper tone is not bright too)
 			MSHookIvar<int>(param, "_iconLocation") = 0;
