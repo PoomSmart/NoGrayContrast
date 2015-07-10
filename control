@@ -6,4 +6,4 @@ Depends: firmware (>= 7.1), mobilesubstrate
 Section: Tweaks
 Version: 1.0
 Architecture: iphoneos-arm
-Description: Remove iOS 7.1's gray contrast handling.
+Description: Remove iOS 7.1+ gray contrast handling.
