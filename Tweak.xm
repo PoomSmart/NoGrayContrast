@@ -49,12 +49,12 @@ extern "C" BOOL _UIAccessibilityEnhanceBackgroundContrast();
 	if (backdropView != nil) {
 		backdropView.hidden = NO;
 		BOOL darkBG = [self _shouldUseDarkBackground];
-		[backdropView setStyle:darkBG ? 12 : 11];
+		backdropView.style = darkBG ? 12 : 11;
 		BOOL contrast = _UIAccessibilityEnhanceBackgroundContrast();
 		if (contrast) {
 			// Because style 11 is reverted to 2 (solid black) when contrast option is enabled.
 			// It does not match with the blurry white style when the option is disabled.
-			[backdropView setStyle:7];
+			backdropView.style = 7;
 		}
 	}
 }
@@ -91,11 +91,13 @@ extern "C" BOOL _UIAccessibilityEnhanceBackgroundContrast();
 		// 4 - folder (expanded, iOS 7)
 		// 5 - folder (expanded, iOS 8.0 - 8.3)
 		// 6 - folder (expanded, iOS 8.4+)
+		// 7 - folder (expanded, iOS 9.0+)
 		BOOL iOS8 = isiOS8Up;
 		BOOL iOS84 = isiOS84Up;
+		BOOL iOS9 = isiOS9Up;
 		if ((iOS8 && !iOS84 && location == 2) || (iOS84 && location == 3) ||
 			(iOS8 && !iOS84 && location == 5) || (iOS84 && location == 6) ||
-			(isiOS7 && location == 4)) {
+			(iOS9 && location == 7) || (isiOS7 && location == 4)) {
 			// What we do here is to disable the black label of icons when they are in dock or expanded folders and contrast option is enabled, just like iOS 7.0
 			// Labels color for homescreen icons is normally white. (If the wallpaper tone is not bright too)
 			MSHookIvar<NSInteger>(param, "_iconLocation") = 0;

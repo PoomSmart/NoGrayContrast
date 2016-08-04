@@ -1,8 +1,7 @@
-GO_EASY_ON_ME = 1
-SDKVERSION = 7.1
-ARCHS = armv7 arm64
+DEBUG = 0
+PACKAGE_VERSION = 1.1
 
-include theos/makefiles/common.mk
+include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = NoGrayContrast
 NoGrayContrast_FILES = Tweak.xm
 NoGrayContrast_FRAMEWORKS = UIKit
